@@ -1,41 +1,43 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import * as authActions from '../actions/AuthActions';
 
 
-export default class AuthForm extends Component {
+class AuthForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
-      username: ''  
+      username: '',
+      password: ''
+      
     };
   }
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.actions.auth(this.state, this.props.title);
+  }
   render() {
-    const { email, password, username } = this.state;
-    const { isSignup, title } = this.props;
+    const { username, password } = this.state;
+    const { title } = this.props;
 
     return (
       <div>
         <h1> {title} </h1>
-        <form>
+        <form onSubmit={ this.handleSubmit }>
           <label>
-            email:
-            <input onChange={ this.handleChange } type="email" name="email" value={ email }/>
+            username:
+            <input onChange={ this.handleChange } type="text" name="username" value={ username }/>
           </label>
           <label>
               password:
             <input onChange={ this.handleChange } type="password" name="password" value={ password }/>
           </label>
-          {isSignup &&
-            <label>
-            username:
-              <input onChange={ this.handleChange } type="text" name="username" value={ username }/>
-            </label>
-          }
+          <input type="submit" value="Submit" />
         </form>
       </div>
     );
@@ -43,7 +45,17 @@ export default class AuthForm extends Component {
 }
 
 
-AuthForm.propTypes = {
-  isSignup: PropTypes.bool.isRequired,
-  title: PropTypes.string.isRequired
+AuthForm.defaultProps = {
 };
+AuthForm.propTypes = {
+  title: PropTypes.string.isRequired,
+  actions: PropTypes.object.isRequired
+};
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators({ ...authActions }, dispatch)
+  };
+}
+
+export default connect(null, mapDispatchToProps)(AuthForm);

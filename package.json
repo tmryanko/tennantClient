@@ -1,8 +1,9 @@
 {
-  "name": "react-redux-starter-kit",
+  "name": "tennants-management",
   "version": "1.1.0",
-  "description": "react-redux-starter-kit",
+  "description": "tennants-management",
   "main": "index.js",
+  "proxy": "http://localhost:3000",
   "scripts": {
     "start": "node server.js --display-error-details",
     "start:prod": "set NODE_ENV=prod& node server.js --display-error-details",
@@ -12,7 +13,7 @@
     "generate_dev_bundle": "webpack --config webpack.config.dev.js",
     "generate_prod_bundle": "webpack --config webpack.config.prod.js"
   },
-  "author": "Matan Kastel & Yoav Nino",
+  "author": "Tomer Yanko",
   "license": "MIT",
   "devDependencies": {
     "autoprefixer": "6.6.1",
@@ -57,11 +58,12 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "history": "^4.7.2",
     "lodash": "4.17.4",
     "prop-types": "^15.6.1",
     "react": "^16.4.1",
     "react-alert": "^2.4.0",
-    "react-bootstrap": "^0.32.1",
+    "react-bootstrap": "^0.32.4",
     "react-dom": "^16.4.1",
     "react-hot-loader": "^3.1.3",
     "react-ionicons": "^2.1.6",

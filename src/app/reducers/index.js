@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
-import baseReducer from './base';
 import toasterReducer from './notifications';
+import authReducer from './auth';
+import tennantReducer from './tennants';
 
 
 const rootReducer = combineReducers({
-  baseReducer,
-  toasterReducer
+  toasterReducer,
+  authReducer,
+  tennantReducer
 });
 
 export default rootReducer;
